@@ -8,10 +8,10 @@ class Controller {
                 model.help(view.help())
                 break;
             case 'list':
-                model.view(view.list())
+                model.list(view.list())
                 break;
             case 'add':
-                model.add(task)
+                model.add(task[1])
                 break;
             default:
                 console.log('bye bye')
