@@ -47,6 +47,12 @@ class View {
                 console.log(pesan)
         }
     }
+
+    static sortingASC() {
+        return function (pesan) {
+            console.log(pesan)
+        }
+    }
 }
 
 module.exports = View
