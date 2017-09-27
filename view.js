@@ -53,6 +53,12 @@ class View {
             console.log(pesan)
         }
     }
+
+    static completedSorting() {
+        return function (pesan) {
+            console.log(pesan)
+        }
+    }
 }
 
 module.exports = View
