@@ -145,7 +145,6 @@ class Model {
 
     static sortingAsc(cb) {
         this.view(data=>{
-            // console.log(data)
             let minIdx, temp
             for (let i = 1; i < data.length; i++){
                 minIdx = i;
@@ -158,17 +157,35 @@ class Model {
                 data[i] = data[minIdx]
                 data[minIdx] = temp
             }
-            // console.log('setelah di sorting')
-            // console.log(data)
             fs.writeFile('data.json', JSON.stringify(data), 'UTF-8', (err) => {
                 if (!err) {
                     let pesan = 'Task sudah diurutkan berdasarkan waktu pembuatan terbaru'
                     cb(pesan)
                 }
             })
-            // for (let i = 1; i< data.length; i++) {
-            //     if(data[i].created_at)
-            // }
+        })
+    }
+
+    static sortingDesc(cb) {
+        this.view(data => {
+            let minIdx, temp
+            for (let i = 1; i < data.length; i++) {
+                minIdx = i;
+                for (let j = i + 1; j < data.length; j++) {
+                    if (data[j].created_at < data[minIdx].created_at) {
+                        minIdx = j
+                    }
+                }
+                temp = data[i]
+                data[i] = data[minIdx]
+                data[minIdx] = temp
+            }
+            fs.writeFile('data.json', JSON.stringify(data), 'UTF-8', (err) => {
+                if (!err) {
+                    let pesan = 'Task sudah diurutkan berdasarkan waktu pembuatan terlama'
+                    cb(pesan)
+                }
+            })
         })
     }
 

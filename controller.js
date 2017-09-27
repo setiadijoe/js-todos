@@ -13,7 +13,7 @@ class Controller {
             case 'add':
                 model.add(task[1], view.add())
                 break;
-            case 'find':
+            case 'task':
                 model.find(task[1], view.find())
                 break;
             case 'delete':
@@ -27,6 +27,9 @@ class Controller {
                 break;
             case 'sortingASC':
                 model.sortingAsc(view.sortingASC())
+                break;
+            case 'sortingDESC':
+                model.sortingDesc(view.sortingDESC())
                 break;
             default:
                 console.log('bye bye')
