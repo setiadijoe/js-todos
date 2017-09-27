@@ -41,14 +41,11 @@ class Model {
         })
     }
 
-    static add(task,cb) {
+    static add(task) {
         this.view((data)=>{
-            // console.log(data)
             let newData=data;
             let obj = {"task":task}
-            // console.log(newData)
             newData.push(obj);
-            // console.log(newData)
             fs.writeFile('data.json', JSON.stringify(newData), 'UTF-8', (err) => {
                 if (err) {
                     console.log('Ada error')
@@ -57,7 +54,19 @@ class Model {
                 }
             })
         })
-        
+    }
+
+    static find(id, cb) {
+        this.view(data=>{
+            for (let i = 1; i < data.length; i++) {
+                if (id == i){
+                    let kirim = data[i].task
+                    cb(kirim)
+                } 
+            }
+
+
+        })
     }
 
 }

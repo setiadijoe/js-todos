@@ -17,6 +17,12 @@ class View {
             }
         }
     }
+
+    static find() {
+        return function (data) {            
+                console.log(data)           
+        }
+    }
 }
 
 module.exports = View
