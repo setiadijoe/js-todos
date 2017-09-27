@@ -25,11 +25,8 @@ class Controller {
             case 'uncomplete':
                 model.uncomplete(task[1], view.uncomplete())
                 break;
-            case 'sortingASC':
-                model.sortingAsc(view.sortingASC())
-                break;
-            case 'sortingDESC':
-                model.sortingDesc(view.sortingDESC())
+            case 'sorting':
+                model.sorting(task[1], view.sorting())
                 break;
             default:
                 console.log('bye bye')

@@ -48,13 +48,7 @@ class View {
         }
     }
 
-    static sortingASC() {
-        return function (pesan) {
-            console.log(pesan)
-        }
-    }
-
-    static sortingDESC() {
+    static sorting() {
         return function (pesan) {
             console.log(pesan)
         }

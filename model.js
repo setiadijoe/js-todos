@@ -99,6 +99,8 @@ class Model {
             for (let i = 1; i < data.length; i++) {
                 if (id == i) {
                     data[i].marked = true
+                    // let tanggal = {"completed": new Date()}
+                    // data[i].push(tanggal)
                     arr.push(data[i])
                 } else {
                     arr.push(data[i])
@@ -143,50 +145,53 @@ class Model {
         })
     }
 
-    static sortingAsc(cb) {
-        this.view(data=>{
-            let minIdx, temp
-            for (let i = 1; i < data.length; i++){
-                minIdx = i;
-                for (let j = i+1; j < data.length; j++){
-                    if (data[j].created_at > data[minIdx].created_at){
-                        minIdx = j
+    static sorting(task, cb) {
+        if (task == 'ASC') {
+            this.view(data=>{
+                let minIdx, temp
+                for (let i = 1; i < data.length; i++){
+                    minIdx = i;
+                    for (let j = i+1; j < data.length; j++){
+                        if (data[j].created_at > data[minIdx].created_at){
+                            minIdx = j
+                        }
                     }
+                    temp = data[i]
+                    data[i] = data[minIdx]
+                    data[minIdx] = temp
                 }
-                temp = data[i]
-                data[i] = data[minIdx]
-                data[minIdx] = temp
-            }
-            fs.writeFile('data.json', JSON.stringify(data), 'UTF-8', (err) => {
-                if (!err) {
-                    let pesan = 'Task sudah diurutkan berdasarkan waktu pembuatan terbaru'
-                    cb(pesan)
-                }
-            })
-        })
-    }
-
-    static sortingDesc(cb) {
-        this.view(data => {
-            let minIdx, temp
-            for (let i = 1; i < data.length; i++) {
-                minIdx = i;
-                for (let j = i + 1; j < data.length; j++) {
-                    if (data[j].created_at < data[minIdx].created_at) {
-                        minIdx = j
+                fs.writeFile('data.json', JSON.stringify(data), 'UTF-8', (err) => {
+                    if (!err) {
+                        let pesan = 'Task sudah diurutkan berdasarkan waktu pembuatan terbaru'
+                        cb(pesan)
                     }
-                }
-                temp = data[i]
-                data[i] = data[minIdx]
-                data[minIdx] = temp
-            }
-            fs.writeFile('data.json', JSON.stringify(data), 'UTF-8', (err) => {
-                if (!err) {
-                    let pesan = 'Task sudah diurutkan berdasarkan waktu pembuatan terlama'
-                    cb(pesan)
-                }
+                })
             })
-        })
+        } else if (task == 'DESC') {
+            this.view(data => {
+                let minIdx, temp
+                for (let i = 1; i < data.length; i++) {
+                    minIdx = i;
+                    for (let j = i + 1; j < data.length; j++) {
+                        if (data[j].created_at < data[minIdx].created_at) {
+                            minIdx = j
+                        }
+                    }
+                    temp = data[i]
+                    data[i] = data[minIdx]
+                    data[minIdx] = temp
+                }
+                fs.writeFile('data.json', JSON.stringify(data), 'UTF-8', (err) => {
+                    if (!err) {
+                        let pesan = 'Task sudah diurutkan berdasarkan waktu pembuatan terlama'
+                        cb(pesan)
+                    }
+                })
+            })
+        } else {
+            let pesan = 'Pilih antara ASC atau DESC'
+            cb(pesan)
+        }
     }
 
 }
