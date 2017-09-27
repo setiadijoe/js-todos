@@ -50,7 +50,7 @@ class Model {
                 if (err) {
                     console.log('Ada error')
                 } else {
-                    console.log('statusnya bagaimana?')
+                    console.log('Data sudah update')
                 }
             })
         })
@@ -61,11 +61,27 @@ class Model {
             for (let i = 1; i < data.length; i++) {
                 if (id == i){
                     let kirim = data[i].task
-                    cb(kirim)
+                    cb(kirim)   
                 } 
             }
+        })
+    }
 
-
+    static delete(id, cb) {
+        this.view(data=>{
+            for (let i = 1; i < data.length; i++) {
+                if (id == i){
+                    data.splice(i,1)
+                    // console.log(data)
+                    fs.writeFile('data.json', JSON.stringify(data), 'UTF-8', (err) => {
+                        if (err) {
+                            console.log('Ada error')
+                        } else {
+                            console.log('Data sudah update')
+                        }
+                    })
+                }
+            }
         })
     }
 

@@ -14,8 +14,10 @@ class Controller {
                 model.add(task[1])
                 break;
             case 'find':
-                // console.log('===',task[1])
                 model.find(task[1], view.find())
+                break;
+            case 'delete':
+                model.delete(task[1])
                 break;
             default:
                 console.log('bye bye')
