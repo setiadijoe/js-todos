@@ -4,7 +4,7 @@ class Model {
     static help(cb) {
         fs.readFile('data.json', 'UTF-8', (err, data)=>{
             if (err) {
-                console.log('Ada error')
+                cb('Ada error')
             } else {
                 let read = JSON.parse(data)
                 let menu = read[0].help.join('\n')
@@ -16,7 +16,7 @@ class Model {
     static list(cb) {
         fs.readFile('data.json', 'UTF-8', (err, data) => {
             if (err) {
-                console.log('Ada error')
+                cb('Ada error')
             } else {
                 let read = JSON.parse(data)
                 let list = []
@@ -41,7 +41,7 @@ class Model {
     static view(cb) {
         fs.readFile('data.json', 'UTF-8', (err, data) => {
             if (err) {
-                console.log('Ada error')
+                cb('Ada error')
             } else {
                 let read = JSON.parse(data)
                 let list = read
